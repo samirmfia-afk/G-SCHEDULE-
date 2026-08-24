@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Gaming Schedule — Premium</title>
+<style>
+:root{--bg:#07090a;--panel:#0d1011;--panel2:#111516;--line:#2d302e;--gold:#c9a45d;--gold2:#ead08a;--white:#f4f2eb;--muted:#8e918d;--green:#72c17c;--blue:#78a9d4;--red:#c26f62}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--white);background:radial-gradient(900px 500px at 78% 0%,#55504430,transparent 65%),radial-gradient(700px 500px at 15% 80%,#26302b28,transparent 65%),var(--bg);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.1;background-image:linear-gradient(120deg,transparent 0 48%,#fff1 49%,transparent 50%);background-size:8px 8px}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.hero{min-height:260px;padding:36px 4vw 74px;display:grid;grid-template-columns:1fr 1.1fr;align-items:center;border-bottom:1px solid #1d2020;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-5%;top:-100px;width:58%;height:380px;background:radial-gradient(ellipse at center,#6760522b,transparent 66%);pointer-events:none}
+.title{position:relative;z-index:2}.small{font:34px Georgia,serif;color:var(--gold)}h1{font:500 clamp(48px,6vw,78px)/.9 Georgia,serif;margin:3px 0 18px;letter-spacing:.015em}.tag{color:var(--gold);font-size:12px;letter-spacing:.25em;text-transform:uppercase}
+.heroStats{position:relative;z-index:2;display:flex;justify-content:center}.stat{width:150px;text-align:center;padding:14px 18px;border-left:1px solid #353633}.stat .ico{font-size:27px;color:var(--gold);height:36px}.stat b{display:block;font:400 43px Georgia,serif}.stat span{font-size:10px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;line-height:1.5}
+.controls{position:absolute;right:4vw;bottom:17px;z-index:5;display:flex;gap:8px;flex-wrap:wrap}.btn{background:#111516;color:var(--white);border:1px solid #45443e;border-radius:5px;padding:9px 13px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;transition:.2s}.btn:hover{border-color:var(--gold);transform:translateY(-1px)}.btn.gold{background:var(--gold);color:#090a0a;border-color:var(--gold);font-weight:700}
+main{width:min(1280px,92vw);margin:22px auto 50px}.toolbar{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:15px;flex-wrap:wrap}.search{flex:1;min-width:220px;max-width:420px;background:#0d1011;border:1px solid #333735;color:var(--white);padding:11px 13px;border-radius:6px;outline:none}.search:focus{border-color:var(--gold)}.filters{display:flex;gap:7px;flex-wrap:wrap}.filter{background:#111516;color:#aaa;border:1px solid #303330;padding:8px 11px;border-radius:5px;font-size:10px;text-transform:uppercase;letter-spacing:.08em}.filter.active,.filter:hover{color:var(--gold2);border-color:#705d3a}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{background:linear-gradient(145deg,#111415f7,#0a0c0df7);border:1px solid #303331;border-radius:9px;padding:18px;box-shadow:0 18px 55px #0005}.panel h2{margin:0;padding:0 0 13px;border-bottom:1px solid #3a3a35;color:var(--gold);font:500 20px Georgia,serif;letter-spacing:.08em;text-transform:uppercase}.panel h2:before{content:"◆";font-size:8px;vertical-align:middle;margin-right:14px}.up h2:before{content:"»";font-size:25px}.future h2:before{content:"◇";font-size:17px}
+.cards{margin-top:7px}.card{display:grid;grid-template-columns:38px 154px 1fr auto;gap:12px;align-items:center;min-height:82px;padding:10px 4px;border-bottom:1px solid #292c2b;transition:.22s;animation:appear .4s both;cursor:pointer}.card:last-child{border-bottom:0}.card:hover{background:linear-gradient(90deg,#151817,transparent);transform:translateX(3px)}.num{font:400 17px Georgia,serif;color:var(--gold)}.thumb{height:58px;border:1px solid #383a37;border-radius:3px;overflow:hidden;position:relative;background:#1a1d1c}.thumb img{width:100%;height:100%;object-fit:cover;display:block}.thumb:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent,#fff1,transparent);transform:translateX(-100%);transition:.5s}.card:hover .thumb:after{transform:translateX(100%)}.thumbText{height:100%;display:grid;place-items:center;text-align:center;font-size:10px;font-weight:800;padding:5px}.name{font-size:14px;font-weight:650;line-height:1.25}.meta{font-size:10px;color:var(--muted);margin-top:5px}.status{text-align:right;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}.badge{display:inline-block;padding:4px 6px;border-radius:3px;background:#1b3320;color:#81ca8a;margin-top:4px}.partial .status{color:#d5b86d}.up .card{grid-template-columns:38px 190px 1fr;min-height:102px}.up .thumb{height:78px}.up .name{font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.progress{height:4px;background:#202321;border-radius:5px;margin-top:7px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));width:0}.cardActions{display:flex;gap:5px;margin-top:7px}.mini{background:#121516;border:1px solid #303431;color:#bbb;border-radius:4px;padding:4px 6px;font-size:9px}.mini:hover{border-color:var(--gold);color:var(--gold2)}
+.future{margin-top:16px}.fc{display:grid;grid-template-columns:35px 80px 1fr 110px;align-items:center;gap:12px;padding:10px 3px;border-bottom:1px solid #292c2b;cursor:pointer;transition:.2s}.fc:last-child{border-bottom:0}.fc:hover{background:#151817}.fc img{width:80px;height:42px;object-fit:cover;border-radius:3px;border:1px solid #343735}.diamond{width:28px;height:28px;border:1px solid var(--gold);transform:rotate(45deg);display:grid;place-items:center}.diamond span{transform:rotate(-45deg);color:var(--gold);font:13px Georgia,serif}.fcname{font-weight:700;letter-spacing:.04em}.date{font-size:10px;color:var(--muted);text-align:right}
+.journey{margin-top:16px}.journey h2:before{content:"";margin:0}.journeyline{display:flex;align-items:center;justify-content:space-between;gap:5px;overflow:auto;padding:17px 5px 5px}.node{min-width:105px;text-align:center}.icon{width:48px;height:48px;border:1px solid #705d3a;border-radius:50%;display:grid;place-items:center;margin:auto;color:var(--gold);font-size:10px;font-weight:800}.node small{display:block;color:var(--muted);font-size:9px;letter-spacing:.07em;text-transform:uppercase;margin-top:8px}.arrow{color:#6d5936;font-size:19px}
+.quote{text-align:center;padding:22px 10px;color:#9b7b43;font:13px Georgia,serif;letter-spacing:.25em;text-transform:uppercase}
+dialog{width:min(560px,92vw);border:1px solid #4a463c;border-radius:10px;background:#0d1011;color:var(--white);padding:0;box-shadow:0 30px 100px #000b}dialog::backdrop{background:#000b;backdrop-filter:blur(5px)}.form{padding:24px}.form h3{font:23px Georgia,serif;color:var(--gold);margin:0 0 20px}label{display:block;color:var(--muted);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin:12px 0 6px}input,select,textarea{width:100%;background:#080a0b;border:1px solid #343835;color:var(--white);border-radius:5px;padding:10px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--gold)}textarea{min-height:70px;resize:vertical}.formBtns{display:flex;justify-content:flex-end;gap:8px;margin-top:20px;flex-wrap:wrap}.details{padding:22px}.detailsTop{display:grid;grid-template-columns:190px 1fr;gap:18px;align-items:center}.detailsImg{width:190px;height:108px;object-fit:cover;border-radius:5px;border:1px solid #393b38}.details h3{font:27px Georgia,serif;color:var(--gold);margin:0 0 6px}.details p{color:var(--muted);font-size:13px;line-height:1.6}.rating{color:var(--gold2);letter-spacing:.1em}.statline{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.statbox{border:1px solid #2c302e;padding:10px;border-radius:5px;background:#101313}.statbox small{display:block;color:var(--muted);font-size:9px;text-transform:uppercase}.statbox b{display:block;margin-top:5px}
+.toast{position:fixed;right:18px;bottom:18px;background:#151817;border:1px solid #655535;color:var(--gold2);padding:11px 14px;border-radius:6px;opacity:0;transform:translateY(10px);transition:.25s;z-index:20}.toast.show{opacity:1;transform:none}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:900px){.hero{grid-template-columns:1fr;min-height:auto;padding-bottom:82px}.heroStats{justify-content:flex-start;margin-top:25px}.stat{width:120px}.layout{grid-template-columns:1fr}}
+@media(max-width:600px){.title h1{font-size:48px}.controls{left:4vw;right:auto}.card,.up .card{grid-template-columns:30px 105px 1fr}.card .status{display:none}.thumb{height:55px}.up .thumb{height:62px}.fc{grid-template-columns:30px 65px 1fr}.fc img{width:65px}.date{display:none}.detailsTop{grid-template-columns:1fr}.detailsImg{width:100%;height:150px}}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="title"><div class="small">MY</div><h1>GAMING<br>SCHEDULE</h1><div class="tag">Play. Enjoy. Complete.</div></div>
+<div class="heroStats">
+<div class="stat"><div class="ico">⌁</div><b id="completedCount">0</b><span>Games<br>Completed</span></div>
+<div class="stat"><div class="ico">◎</div><b id="nextCount">0</b><span>Up<br>Next</span></div>
+<div class="stat"><div class="ico">⚑</div><b id="futureCount">0</b><span>Future<br>Games</span></div>
+</div>
+<div class="controls"><button class="btn gold" onclick="openAdd()">＋ Add Game</button><button class="btn" onclick="exportData()">Export</button><button class="btn" onclick="$('importFile').click()">Import</button><button class="btn" onclick="resetData()">Reset</button><input id="importFile" type="file" accept=".json" hidden onchange="importData(event)"></div>
+</header>
+
+<main>
+<div class="toolbar">
+<input class="search" id="search" placeholder="Search your games..." oninput="render()">
+<div class="filters">
+<button class="filter active" data-filter="all" onclick="setFilter(this,'all')">All</button>
+<button class="filter" data-filter="completed" onclick="setFilter(this,'completed')">Completed</button>
+<button class="filter" data-filter="next" onclick="setFilter(this,'next')">Up Next</button>
+<button class="filter" data-filter="future" onclick="setFilter(this,'future')">Future</button>
+</div>
+</div>
+
+<div class="layout">
+<section class="panel"><h2>Completed Games</h2><div id="completed" class="cards"></div></section>
+<div>
+<section class="panel up"><h2>Up Next</h2><div id="upnext" class="cards"></div></section>
+<section class="panel future"><h2>Future Plan · Far Cry Series</h2><div id="farcry"></div></section>
+</div>
+</div>
+<section class="panel journey"><h2>Gaming Journey</h2><div id="journey" class="journeyline"></div></section>
+<div class="quote">Every game is a new story · Every story stays with you</div>
+</main>
+
+<dialog id="editDialog"><form class="form" onsubmit="saveGame(event)">
+<h3 id="dialogTitle">ADD GAME</h3><input type="hidden" id="editIndex">
+<label>Game name</label><input id="gameName" required>
+<label>Status</label><select id="gameStatus"><option value="completed">Completed</option><option value="partial">Partially Completed</option><option value="next">Up Next</option><option value="future">Future</option></select>
+<label>Progress (%)</label><input id="gameProgress" type="number" min="0" max="100" value="0">
+<label>Your rating (0–10)</label><input id="gameRating" type="number" min="0" max="10" step=".5" value="0">
+<label>Category / note</label><input id="gameNote" placeholder="Action / Adventure">
+<label>Cover image URL (optional)</label><input id="gameImage" placeholder="https://...">
+<label>Extra note</label><textarea id="gameExtra" placeholder="Already downloaded, personal note..."></textarea>
+<div class="formBtns"><button type="button" class="btn" onclick="editDialog.close()">Cancel</button><button type="button" class="btn" id="deleteBtn" onclick="deleteGame()">Delete</button><button class="btn gold">Save Game</button></div>
+</form></dialog>
+
+<dialog id="detailDialog"><div class="details">
+<div class="detailsTop"><img id="detailImg" class="detailsImg" alt=""><div><h3 id="detailName"></h3><div id="detailRating" class="rating"></div><p id="detailText"></p></div></div>
+<div class="statline"><div class="statbox"><small>Status</small><b id="detailStatus"></b></div><div class="statbox"><small>Progress</small><b id="detailProgress"></b></div></div>
+<div class="formBtns"><button class="btn" onclick="detailDialog.close()">Close</button><button class="btn gold" onclick="detailDialog.close();editGame(window.detailIndex)">Edit Game</button></div>
+</div></dialog>
+<div id="toast" class="toast"></div>
+
+<script>
+const img=id=>`https://cdn.cloudflare.steamstatic.com/steam/apps/${id}/header.jpg`;
+const defaultGames=[
+{name:"Mafia II Definitive Edition",status:"completed",progress:100,rating:0,note:"Action / Adventure",image:img(1030830),extra:""},
+{name:"Mafia Definitive Edition",status:"completed",progress:100,rating:0,note:"Action / Adventure",image:img(1030840),extra:""},
+{name:"The Witcher 3",status:"completed",progress:100,rating:0,note:"RPG",image:img(292030),extra:""},
+{name:"Mafia: The Old Country",status:"completed",progress:100,rating:0,note:"Action / Adventure",image:img(1941540),extra:""},
+{name:"GTA San Andreas",status:"partial",progress:70,rating:0,note:"~70% completed",image:img(1547000),extra:""},
+{name:"Red Dead Redemption",status:"completed",progress:100,rating:0,note:"Action / Adventure",image:img(2668510),extra:""},
+{name:"Red Dead Redemption II",status:"completed",progress:100,rating:0,note:"Action / Adventure",image:img(1174180),extra:""},
+{name:"GTA IV",status:"completed",progress:100,rating:0,note:"Open World",image:img(12210),extra:""},
+{name:"Ghost of Tsushima",status:"completed",progress:100,rating:0,note:"Action / Adventure",image:img(2215430),extra:""},
+{name:"Marvel's Spider-Man",status:"completed",progress:100,rating:0,note:"Action / Adventure",image:img(1817070),extra:""},
+{name:"Sleeping Dogs: Definitive Edition",status:"completed",progress:100,rating:0,note:"Action / Adventure",image:img(307690),extra:""},
+{name:"Assassin's Creed IV: Black Flag Resynced",status:"next",progress:0,rating:0,note:"Action / Adventure",image:img(242050),extra:"Already downloaded"},
+{name:"Hitman: World of Assassination",status:"next",progress:0,rating:0,note:"Stealth / Assassination",image:img(1659040),extra:""},
+{name:"GTA V",status:"next",progress:0,rating:0,note:"Open World",image:img(271590),extra:""}
+];
+const farcry=[
+["Far Cry 3","Nov 29, 2012",220240],["Far Cry 4","Nov 18, 2014",298110],["Far Cry Primal","Feb 23, 2016",371660],
+["Far Cry 5","Mar 27, 2018",552520],["Far Cry New Dawn","Feb 15, 2019",939960],["Far Cry 6","Oct 7, 2021",2369390]
+];
+let games=JSON.parse(localStorage.getItem("myGamingSchedulePremium")||"null")||structuredClone(defaultGames);
+let currentFilter="all";window.detailIndex=-1;const $=id=>document.getElementById(id);
+function esc(v=""){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function save(){localStorage.setItem("myGamingSchedulePremium",JSON.stringify(games))}
+function safeImg(g){return g.image?`<img src="${esc(g.image)}" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">`:""} 
+function thumb(g){return `<div class="thumb">${safeImg(g)}<div class="thumbText" style="${g.image?"display:none":""}">${esc(g.name.split(/[: ]+/).slice(0,3).join(" "))}</div></div>`}
+function matches(g){const q=$("search").value.trim().toLowerCase();return (!q||g.name.toLowerCase().includes(q)||String(g.note).toLowerCase().includes(q))&&(currentFilter==="all"||(currentFilter==="completed"&&(g.status==="completed"||g.status==="partial"))||g.status===currentFilter)}
+function cards(list){
+ if(!list.length)return `<div style="padding:25px;color:var(--muted);text-align:center">No games here.</div>`;
+ return list.map(g=>{const i=games.indexOf(g),label=g.status==="partial"?"Partial":g.status==="completed"?"Completed":"Up Next";return `<div class="card ${g.status}" style="animation-delay:${Math.min(i*.035,.35)}s" onclick="showDetails(${i})"><div class="num">${String(i+1).padStart(2,"0")}</div>${thumb(g)}<div><div class="name">${esc(g.name)}</div><div class="meta">${esc(g.note||"")}${g.extra?" · "+esc(g.extra):""}</div><div class="progress"><i style="width:${Math.max(0,Math.min(100,g.progress||0))}%"></i></div><div class="cardActions"><button class="mini" onclick="event.stopPropagation();quickComplete(${i})">${g.status==="completed"?"↺ Reset":"✓ Complete"}</button><button class="mini" onclick="event.stopPropagation();editGame(${i})">Edit</button></div></div><div class="status">${label}<br>${g.rating?`★ ${g.rating}/10`:"—"} </div></div>`}).join("");
+}
+function render(){
+ const completed=games.filter(g=>(g.status==="completed"||g.status==="partial")&&matches(g));
+ const next=games.filter(g=>g.status==="next"&&matches(g));
+ const future=games.filter(g=>g.status==="future"&&matches(g));
+ $("completedCount").textContent=games.filter(g=>g.status==="completed"||g.status==="partial").length;
+ $("nextCount").textContent=games.filter(g=>g.status==="next").length;
+ $("futureCount").textContent=games.filter(g=>g.status==="future").length+farcry.length;
+ $("completed").innerHTML=cards(completed);$("upnext").innerHTML=cards(next);
+ $("farcry").innerHTML=farcry.map((f,i)=>`<div class="fc"><div class="diamond"><span>${i+1}</span></div><img src="${img(f[2])}" onerror="this.style.opacity=.25"><div class="fcname">${f[0]}</div><div class="date">${f[1]}</div></div>`).join("");
+ const journey=["Mafia / Crime","RPG / Fantasy","Western","Open World","Samurai","Superhero","Stealth","Far Cry"];
+ $("journey").innerHTML=journey.map((x,i)=>`<div class="node"><div class="icon">${String(i+1).padStart(2,"0")}</div><small>${x}</small></div>${i<7?'<div class="arrow">→</div>':''}`).join("");
+}
+function setFilter(el,f){currentFilter=f;document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));el.classList.add("active");render()}
+function openAdd(){$("dialogTitle").textContent="ADD GAME";$("editIndex").value="";$("gameName").value="";$("gameStatus").value="future";$("gameProgress").value=0;$("gameRating").value=0;$("gameNote").value="";$("gameImage").value="";$("gameExtra").value="";$("deleteBtn").style.display="none";editDialog.showModal()}
+function editGame(i){const g=games[i];$("dialogTitle").textContent="EDIT GAME";$("editIndex").value=i;$("gameName").value=g.name;$("gameStatus").value=g.status;$("gameProgress").value=g.progress??0;$("gameRating").value=g.rating??0;$("gameNote").value=g.note||"";$("gameImage").value=g.image||"";$("gameExtra").value=g.extra||"";$("deleteBtn").style.display="inline-block";editDialog.showModal()}
+function saveGame(e){e.preventDefault();const i=$("editIndex").value,g={name:$("gameName").value.trim(),status:$("gameStatus").value,progress:+$("gameProgress").value,rating:+$("gameRating").value,note:$("gameNote").value.trim(),image:$("gameImage").value.trim(),extra:$("gameExtra").value.trim()};if(i==="")games.push(g);else games[+i]=g;save();editDialog.close();render();toast("Game saved")}
+function deleteGame(){const i=+$("editIndex").value;if(confirm("Remove this game from your schedule?")){games.splice(i,1);save();editDialog.close();render();toast("Game removed")}}
+function quickComplete(i){if(games[i].status==="completed"){games[i].status="future";games[i].progress=0}else{games[i].status="completed";games[i].progress=100}save();render();toast("Status updated")}
+function showDetails(i){const g=games[i];window.detailIndex=i;$("detailName").textContent=g.name;$("detailRating").textContent=g.rating?`★ ${g.rating}/10`:"Not rated yet";$("detailText").innerHTML=`<b>Category:</b> ${esc(g.note||"—")}<br><b>Note:</b> ${esc(g.extra||"—")}`;$("detailStatus").textContent=g.status==="completed"?"Completed":g.status==="partial"?"Partially Completed":g.status==="next"?"Up Next":"Future";$("detailProgress").textContent=`${g.progress||0}%`;$("detailImg").src=g.image||"";$("detailImg").style.display=g.image?"block":"none";detailDialog.showModal()}
+function toast(t){$("toast").textContent=t;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),1700)}
+function exportData(){const blob=new Blob([JSON.stringify(games,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="my-gaming-schedule.json";a.click();URL.revokeObjectURL(a.href);toast("Schedule exported")}
+function importData(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!Array.isArray(x))throw 0;games=x;save();render();toast("Schedule imported")}catch{alert("That file is not a valid gaming schedule.")}};r.readAsText(file);e.target.value=""}
+function resetData(){if(confirm("Reset everything to the original schedule?")){games=structuredClone(defaultGames);save();render();toast("Schedule reset")}}
+render();
+</script>
+</body>
+</html>
